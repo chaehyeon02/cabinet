@@ -23,7 +23,7 @@ pipeline {
         stage('Push image to Docker Hub') {
             steps {
                 script {
-                        docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
+                        docker.withRegistry('https://index.docker.io/v1/', 'lch125') {
                             sh "docker push lch125/cabinet_mypage"
                         }
                     
