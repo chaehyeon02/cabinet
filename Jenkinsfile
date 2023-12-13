@@ -15,7 +15,7 @@ pipeline {
                     sh 'docker build -t jaeae/cabinet_mypage:latest -f Dockerfile .'
 
                     // Docker 컨테이너 실행 (백그라운드에서 실행)
-                    sh 'docker run -d -p 3000:3000 --name cabinet_mypage jaeae/cabinet_mypage:latest'
+                    sh 'docker run -d -p 3001:3000 --name cabinet_mypage jaeae/cabinet_mypage:latest'
                 }
             }
         }
