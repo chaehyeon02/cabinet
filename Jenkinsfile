@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    tools {nodejs "nodejs"}
 
     stages {
         stage('clone') {
@@ -8,11 +7,10 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/chaehyeon02/cabinet.git']])
             }
         }
+
         stage('Build and Run Docker Image') {
             steps {
                 script {
-
-                    
                     // Docker 이미지 빌드
                     sh 'docker build -t lch125/cabinet:latest -f Dockerfile .'
 
@@ -21,15 +19,16 @@ pipeline {
                 }
             }
         }
-        stage('Tag and Push to Hub') {
+
+        stage('Push image to Docker Hub') {
             steps {
-                script{
-                     docker.withRegistry('https://index.docker.io/v1/', 'lch125') {
+                script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'lch125') {
                             sh "docker push lch125/cabinet"
-                        }                        
-                                                
+                        }
+                    
+                }
             }
         }
     }
 }
-}   
