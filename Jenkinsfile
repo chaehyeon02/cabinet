@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('clone') {
             steps {
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/EunjaeJo/cabinet.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/chaehyeon02/cabinet.git']])
             }
         }
 
@@ -12,10 +12,10 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드 - myPage: cabinet1
-                    sh 'docker build -t jaeae/cabinet_mypage:latest -f Dockerfile .'
+                    sh 'docker build -t lch125/cabinet_mypage:latest -f Dockerfile .'
 
                     // Docker 컨테이너 실행 (백그라운드에서 실행)
-                    sh 'docker run -d -p 3001:3000 --name cabinet_mypage jaeae/cabinet_mypage:latest'
+                    sh 'docker run -d -p 3001:3000 --name cabinet_mypage lch125/cabinet_mypage:latest'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                         docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
-                            sh "docker push jaeae/cabinet_mypage"
+                            sh "docker push lch125/cabinet_mypage"
                         }
                     
                 }
