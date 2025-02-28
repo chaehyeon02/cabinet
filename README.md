@@ -1,4 +1,2 @@
 # cabinet
-OSS 프로젝트
-
-풀리퀘 테스트
+OSS(Open Source SW) 프로젝트
